@@ -1,0 +1,4 @@
+.profile__info-container {
+    display: flex;
+    gap: 30px;
+}

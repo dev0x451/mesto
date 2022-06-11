@@ -1,0 +1,9 @@
+.profile__add-button {
+    width: 150px;
+    height: 50px;
+    box-sizing: border-box;
+    border: 2px solid white;
+    background-image: url('../../../images/Add-Button-Sign.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
