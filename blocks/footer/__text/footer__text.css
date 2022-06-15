@@ -1,16 +1,12 @@
-.profile__job {
+.footer__text {
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-    color: white;
-    margin: 7px 0 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    color: #545454;
 }
 
 @media screen and (max-width: 450px) {
-    .profile__job {
+    .footer__text {
         font-size: 14px;
         line-height: 17px;
     }

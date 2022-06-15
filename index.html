@@ -8,8 +8,19 @@
     <link rel="stylesheet" href="/pages/index.css">
 </head>
 
-
-<body class="page">
+<body class="page" aria-label="проект Место">
+    <div class="popup">
+        <div class="popup__container">
+            <div class="popup__close-icon">
+            </div>
+            <form class="popup__form">
+                <h3 class="popup__heading">Редактировать профиль</h3>
+                <input class="popup__input popup__input_name" type="text" name="input-name" id="input-name">
+                <input class="popup__input popup__input_job" type="text" name="input-job" id="input-job">
+                <button class="popup__save-button">Сохранить</button>
+            </form>
+        </div>
+    </div>
     <div class="page__container">
         <header class="header">
             <img class="header__logo" src="images/mesto-logo.svg" alt="логотип Mesto Russia">
@@ -19,19 +30,64 @@
                 <div class="profile__info-container">
                     <img class="profile__avatar" src="/images/Avatar-Custo.png" alt="Жан Жак Кусто">
                     <div class="profile__info">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
                         <div class="profile__edit-button">
                         </div>
-                        <h1 class="profile__job">Исследователь океана</h1>
+                        <p class="profile__job">Исследователь океана</p>
                     </div>
-
                 </div>
                 <div class="profile__add-button"></div>
-
             </section>
-
+            <section class="elements" aria-label="карточки">
+                <article class="element">
+                    <img class="element__image" src="/images/Karachaevsk.jpg" alt="Карачаевск">
+                    <div class="element__description">
+                        <h2 class="element__name">Карачаевск</h2>
+                        <div class="element__heart-icon"></div>
+                    </div>
+                </article>
+                <article class="element">
+                    <img class="element__image" src="/images/Elbrus.jpg" alt="Эльбрус">
+                    <div class="element__description">
+                        <h2 class="element__name">Гора Эльбрус</h2>
+                        <div class="element__heart-icon"></div>
+                    </div>
+                </article>
+                <article class="element">
+                    <img class="element__image" src="/images/Dombai.jpg" alt="Домбай">
+                    <div class="element__description">
+                        <h2 class="element__name">Домбай</h2>
+                        <div class="element__heart-icon"></div>
+                    </div>
+                </article>
+                <article class="element">
+                    <img class="element__image" src="/images/Elbrus.jpg" alt="Эльбрус">
+                    <div class="element__description">
+                        <h2 class="element__name">Гора Эльбрус</h2>
+                        <div class="element__heart-icon"></div>
+                    </div>
+                </article>
+                <article class="element">
+                    <img class="element__image" src="/images/Dombai.jpg" alt="Домбай">
+                    <div class="element__description">
+                        <h2 class="element__name">Домбай</h2>
+                        <div class="element__heart-icon"></div>
+                    </div>
+                </article>
+                <article class="element">
+                    <img class="element__image" src="/images/Karachaevsk.jpg" alt="Карачаевск">
+                    <div class="element__description">
+                        <h2 class="element__name">Карачаево-Черкессия</h2>
+                        <div class="element__heart-icon"></div>
+                    </div>
+                </article>
+            </section>
         </main>
+        <footer class="footer">
+            <p class="footer__text">© 2020 Mesto Russia</p>
+        </footer>
     </div>
+    <script src="/scripts/index.js"></script>
 </body>
 
 </html>

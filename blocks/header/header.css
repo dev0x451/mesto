@@ -1,9 +1,14 @@
 .header {
     box-sizing: border-box;
     width: 100%;
-    min-height: 74px;
     margin: 45px 0 0;
     color: white;
     border-bottom: 1px solid rgba(84, 84, 84, .7);
     ;
+}
+
+@media screen and (max-width: 450px) {
+    .header {
+        margin: 28px 0 0;
+    }
 }
