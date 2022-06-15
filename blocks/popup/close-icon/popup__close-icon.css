@@ -14,14 +14,11 @@
   opacity: .6;
 }
 
-.popup__close-icon {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: -36px;
-  right: 0;
-  background-image: url(../../../images/Close-Icon.svg);
-  background-size: cover;
-  background-position: center;
-  transition: opacity .2s ease-in;
+@media screen and (max-width: 450px) {
+  .popup__close-icon {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
 }
