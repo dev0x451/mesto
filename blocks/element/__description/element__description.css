@@ -1,6 +1,6 @@
 .element__description {
-    margin: 26px 20px 25px 21px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin: 26px 20px 25px 21px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

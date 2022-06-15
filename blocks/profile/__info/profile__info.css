@@ -1,29 +1,29 @@
 .profile__info {
-    position: relative;
-    max-width: 450px;
+  position: relative;
+  max-width: 450px;
 }
 
 @media screen and (max-width: 900px) {
-    .profile__info {
-        max-width: 400px;
-    }
+  .profile__info {
+    max-width: 400px;
+  }
 }
 
 @media screen and (max-width: 800px) {
-    .profile__info {
-        max-width: 350px;
-    }
+  .profile__info {
+    max-width: 350px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .profile__info {
-        max-width: 340px;
-        text-align: center;
-    }
+  .profile__info {
+    max-width: 340px;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 450px) {
-    .profile__info {
-        max-width: 220px;
-    }
+  .profile__info {
+    max-width: 220px;
+  }
 }

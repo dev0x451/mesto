@@ -9,6 +9,6 @@
 * медиа-запросы
 * Javascript
 
-Оцените мой проект на Github Pages: [Проект: Место](https://tinypng.com/)
+Оцените мой проект на Github Pages: [Проект: Место](https://sigma696.github.io/mesto/)
 Автор: Аркадий Щапов
 Спасибо за внимание!

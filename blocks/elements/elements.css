@@ -1,22 +1,22 @@
 .elements {
-    margin: 50px 0 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 17px;
-    row-gap: 20px;
-    justify-content: center;
+  margin: 50px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 17px;
+  row-gap: 20px;
+  justify-content: center;
 
 }
 
 @media screen and (max-width: 917px) {
-    .elements {
-        margin: 50px 19px 0;
-    }
+  .elements {
+    margin: 50px 19px 0;
+  }
 }
 
 @media screen and (max-width: 450px) {
-    .elements {
-        margin: 36px 19px 0;
-        row-gap: 19px;
-    }
+  .elements {
+    margin: 36px 19px 0;
+    row-gap: 19px;
+  }
 }
