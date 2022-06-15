@@ -1,4 +1,7 @@
-.element__heart-icon {
+.element__heart-button {
+  padding: 0;
+  border-style: none;
+  background-color: transparent;
   background-image: url('../../../images/Heart-Icon.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -8,6 +11,7 @@
   transition: opacity .2s ease-in;
 }
 
-.element__heart-icon:hover {
+.element__heart-button:hover {
+  cursor: pointer;
   opacity: .5;
 }

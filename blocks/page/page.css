@@ -1,8 +1,8 @@
 .page {
   position: relative;
-  background-color: black;
+  background-color: #000;
   margin: 0;
   padding: 0;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
 }
