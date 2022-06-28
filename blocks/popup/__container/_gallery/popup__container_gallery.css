@@ -1,0 +1,10 @@
+.popup__container_gallery {
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+}
+
+@media screen and (max-width: 450px) {
+    .popup__container_gallery {}
+}

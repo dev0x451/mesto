@@ -9,17 +9,45 @@
 </head>
 
 <body class="page" aria-label="проект Место">
-  <div class="popup">
+
+  <!-- попап редактирования юзера -->
+  <div class="popup popup_edit">
     <div class="popup__container">
-      <h3 class="popup__heading">Редактировать профиль</h3>
-      <form class="popup__form" name="edit-form">
-        <input class="popup__input popup__input_name" type="text" name="input-name" id="input-name">
+      <h3 class=" popup__heading">Редактировать профиль</h3>
+      <form class="popup__form popup__form_edit" name="edit-form">
+        <input class=" popup__input popup__input_name" type="text" name="input-name" id="input-name">
         <input class="popup__input popup__input_job" type="text" name="input-job" id="input-job">
         <button class="popup__save-button" type="submit" name="save-button">Сохранить</button>
       </form>
-      <button type="button" class="popup__close-button"></button>
+      <button type="button" class="popup__close-button popup__close-button_edit"></button>
+
     </div>
   </div>
+  <!-- попап добавления места -->
+  <div class="popup popup_add">
+    <div class="popup__container">
+      <h3 class=" popup__heading">Новое место</h3>
+      <form class="popup__form popup__form_add" name="add-form">
+        <input class="popup__input popup__input_title" type="text" name="input-title" id="input-title"
+          placeholder="Название">
+        <input class="popup__input popup__input_link" type="text" name="input-link" id="input-link"
+          placeholder="Ссылка на картинку">
+        <button class="popup__save-button" type="submit" name="create-button">Создать</button>
+      </form>
+      <button type="button" class="popup__close-button popup__close-button_add"></button>
+
+    </div>
+  </div>
+  <!-- попап галереи -->
+  <div class="popup popup_gallery">
+    <div class="popup__container popup__container_gallery">
+      <div class="popup__close-button popup__close-button_gallery">
+      </div>
+      <img src="images/Dombai.jpg" alt="">
+      <p class="">Это Домбай</p>
+    </div>
+  </div>
+
   <div class="page__container">
     <header class="header">
       <img class="header__logo" src="images/mesto-logo.svg" alt="логотип Mesto Russia">
@@ -37,54 +65,24 @@
         <button type="button" class="profile__add-button"></button>
       </section>
       <section class="elements" aria-label="карточки">
-        <article class="element">
-          <img class="element__image" src="images/Karachaevsk.jpg" alt="Карачаевск">
-          <div class="element__description">
-            <h2 class="element__name">Карачаевск</h2>
-            <button class="element__heart-button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="images/Elbrus.jpg" alt="Эльбрус">
-          <div class="element__description">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button class="element__heart-button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="images/Dombai.jpg" alt="Домбай">
-          <div class="element__description">
-            <h2 class="element__name">Домбай</h2>
-            <button class="element__heart-button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="images/Elbrus.jpg" alt="Эльбрус">
-          <div class="element__description">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button class="element__heart-button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="images/Dombai.jpg" alt="Домбай">
-          <div class="element__description">
-            <h2 class="element__name">Домбай</h2>
-            <button class="element__heart-button" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__image" src="images/Karachaevsk.jpg" alt="Карачаевск">
-          <div class="element__description">
-            <h2 class="element__name">Карачаево-Черкессия</h2>
-            <button class="element__heart-button" type="button"></button>
-          </div>
-        </article>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
   </div>
+  <template id="card-template">
+    <article class="element">
+      <img class="element__image" src="" alt="">
+      <div class="element__description">
+        <h2 class="element__name"></h2>
+        <button class="element__heart-button" type="button">
+          <div class="element__heart-icon"></div>
+        </button>
+      </div>
+    </article>
+  </template>
+
   <script src="scripts/index.js"></script>
 </body>
 
