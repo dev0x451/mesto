@@ -1,14 +1,15 @@
-.element__heart-icon {
-    background-image: url('../../../images/Heart-Icon.svg');
+.element__delete-icon {
+    background-image: url('../../../images/Trash-icon.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    width: 22px;
+    width: 18px;
     height: 19px;
     transition: opacity .2s ease-in;
+
 }
 
-.element__heart-icon:hover {
+.element__delete-icon:hover {
     cursor: pointer;
     opacity: .5;
 }

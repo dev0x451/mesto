@@ -20,7 +20,6 @@
         <button class="popup__save-button" type="submit" name="save-button">Сохранить</button>
       </form>
       <button type="button" class="popup__close-button popup__close-button_edit"></button>
-
     </div>
   </div>
   <!-- попап добавления места -->
@@ -35,16 +34,15 @@
         <button class="popup__save-button" type="submit" name="create-button">Создать</button>
       </form>
       <button type="button" class="popup__close-button popup__close-button_add"></button>
-
     </div>
   </div>
   <!-- попап галереи -->
-  <div class="popup popup_gallery">
-    <div class="popup__container popup__container_gallery">
-      <div class="popup__close-button popup__close-button_gallery">
+  <div class="popup popup-gallery">
+    <div class="popup-gallery__container">
+      <div class="popup__close-button popup-gallery__close-button">
       </div>
-      <img src="images/Dombai.jpg" alt="">
-      <p class="">Это Домбай</p>
+      <img class="popup-gallery__image" src="placeholder" alt="">
+      <p class="popup-gallery__caption"></p>
     </div>
   </div>
 
@@ -74,6 +72,9 @@
   <template id="card-template">
     <article class="element">
       <img class="element__image" src="" alt="">
+      <button class="element__delete-button" type="button">
+        <div class="element__delete-icon"></div>
+      </button>
       <div class="element__description">
         <h2 class="element__name"></h2>
         <button class="element__heart-button" type="button">

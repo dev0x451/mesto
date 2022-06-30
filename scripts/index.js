@@ -27,14 +27,14 @@ const initialCards = [
 
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
-const popupGallery = document.querySelector('.popup_gallery');
+const popupGallery = document.querySelector('.popup-gallery');
 const formElementEdit = document.querySelector('.popup__form_edit');
 const formElementAdd = document.querySelector('.popup__form_add');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const closeButtonEdit = document.querySelector('.popup__close-button_edit');
 const closeButtonAdd = document.querySelector('.popup__close-button_add');
-const closeButtonGallery = document.querySelector('.popup__close-button_gallery');
+const closeButtonGallery = document.querySelector('.popup-gallery__close-button');
 const inputName = document.querySelector('.popup__input_name');
 const inputJob = document.querySelector('.popup__input_job');
 const inputTitle = document.querySelector('.popup__input_title');
@@ -44,38 +44,6 @@ const profileJob = document.querySelector('.profile__job');
 const cardTemplate = document.querySelector('#card-template').content;
 const cardElements = document.querySelector('.elements');
 
-//кнопка like
-toggleLike = (button) => {
-  button.querySelector('.element__heart-icon').classList.toggle('element__heart-icon_active');
-
-}
-
-renderNewCard = (name, link, place) => {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  const cardImage = cardElement.querySelector('.element__image');
-  const cardDescription = cardElement.querySelector('.element__name');
-  const likeButton = cardElement.querySelector('.element__heart-button');
-  // toggleLike(likeButton);
-  likeButton.addEventListener('click', (evt) => {
-    likeButton.querySelector('.element__heart-icon').classList.toggle('element__heart-icon_active');
-  });
-  cardImage.setAttribute('src', link);
-  cardImage.setAttribute('alt', name);
-  cardDescription.textContent = name;
-  if (place === 'start') cardElements.prepend(cardElement)
-  else if (place === 'end') cardElements.append(cardElement);
-}
-
-//загрузим все карточки из массива когда весь документ прогрузится
-window.addEventListener("load", (evt) => {
-  initialCards.forEach(card => {
-    renderNewCard(card.name, card.link, 'end');
-  });
-});
-
-//renderNewCard('Чернобыль', 'https://www.calend.ru/calendar/wp-content/uploads/ice_screenshot_20210424-223143.jpeg');
-
-
 
 showPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -83,13 +51,57 @@ showPopup = (popup) => {
 
 closePopup = (popup) => {
   popup.classList.remove('popup_opened');
-  // popup.classList.add('popup_closed');
+}
+
+
+const likeButtonHandler = (button) => {
+  button.querySelector('.element__heart-icon').classList.toggle('element__heart-icon_active');
+}
+
+const deleteButtonHandler = (button) => {
+  button.closest('.element').remove();
+}
+
+const cardImageHandler = (imageLink, caption) => {
+  popupGallery.querySelector('.popup-gallery__image').src = imageLink;
+  popupGallery.querySelector('.popup-gallery__image').alt = caption;
+  popupGallery.querySelector('.popup-gallery__caption').textContent = caption;
+  showPopup(popupGallery);
 
 }
 
+const renderCard = (cardElement, container, position) => {
+  if (position === 'start') container.prepend(cardElement)
+  else if (position === 'end') container.append(cardElement);
+}
+
+const createNewCard = (card) => {
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardImage = cardElement.querySelector('.element__image');
+  const cardDescription = cardElement.querySelector('.element__name');
+  const likeButton = cardElement.querySelector('.element__heart-button');
+  const deleteButton = cardElement.querySelector('.element__delete-button');
+
+  likeButton.addEventListener('click', () => { likeButtonHandler(likeButton) });
+  deleteButton.addEventListener('click', () => { deleteButtonHandler(deleteButton) });
+  cardImage.addEventListener('click', (evt) => { cardImageHandler(card.link, card.name); });
+
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
+  cardDescription.textContent = card.name;
+  return cardElement;
+}
+
+//загрузим все карточки из массива когда весь документ прогрузится
+window.addEventListener("load", (evt) => {
+  initialCards.forEach(card => {
+    renderCard(createNewCard(card), cardElements, 'end');
+  });
+});
+
+
 formSubmitHandlerEdit = (evt) => {
   evt.preventDefault();
-  console.log('form edit');
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(popupEdit);
@@ -97,8 +109,11 @@ formSubmitHandlerEdit = (evt) => {
 
 formSubmitHandlerAdd = (evt) => {
   evt.preventDefault();
-  //'Чернобыль', 'https://www.calend.ru/calendar/wp-content/uploads/ice_screenshot_20210424-223143.jpeg'
-  renderNewCard(inputTitle.value, inputLink.value, 'start');
+  const card = {
+    name: inputTitle.value,
+    link: inputLink.value
+  };
+  renderCard(createNewCard(card), cardElements, 'start');
   inputTitle.value = '';
   inputLink.value = '';
   closePopup(popupAdd);
@@ -124,7 +139,7 @@ closeButtonAdd.addEventListener('click', () => {
   closePopup(popupAdd);
 });
 closeButtonGallery.addEventListener('click', () => {
-  closePopup(popupGallery)
+  closePopup(popupGallery);
 });
 formElementEdit.addEventListener('submit', formSubmitHandlerEdit);
 formElementAdd.addEventListener('submit', formSubmitHandlerAdd);
