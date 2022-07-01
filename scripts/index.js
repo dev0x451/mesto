@@ -28,6 +28,8 @@ const initialCards = [
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const popupGallery = document.querySelector('.popup-gallery');
+const popupGalleryImage = popupGallery.querySelector('.popup-gallery__image');
+const popupGalleryCaption = popupGallery.querySelector('.popup-gallery__caption');
 const formElementEdit = document.querySelector('.popup__form_edit');
 const formElementAdd = document.querySelector('.popup__form_add');
 const editButton = document.querySelector('.profile__edit-button');
@@ -43,7 +45,15 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const cardTemplate = document.querySelector('#card-template').content;
 const cardElements = document.querySelector('.elements');
+// находим все крестики проекта по универсальному селектору
+const closeButtons = document.querySelectorAll('.popup__close-button');
 
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап 
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 showPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -54,20 +64,19 @@ closePopup = (popup) => {
 }
 
 
-const likeButtonHandler = (button) => {
+const handleLikeButton = (button) => {
   button.querySelector('.element__heart-icon').classList.toggle('element__heart-icon_active');
 }
 
-const deleteButtonHandler = (button) => {
+const handleDeleteButton = (button) => {
   button.closest('.element').remove();
 }
 
-const cardImageHandler = (imageLink, caption) => {
-  popupGallery.querySelector('.popup-gallery__image').src = imageLink;
-  popupGallery.querySelector('.popup-gallery__image').alt = caption;
-  popupGallery.querySelector('.popup-gallery__caption').textContent = caption;
+const handleCardImage = (imageLink, caption) => {
+  popupGalleryImage.src = imageLink;
+  popupGalleryImage.alt = caption;
+  popupGalleryCaption.textContent = caption;
   showPopup(popupGallery);
-
 }
 
 const renderCard = (cardElement, container, position) => {
@@ -82,9 +91,9 @@ const createNewCard = (card) => {
   const likeButton = cardElement.querySelector('.element__heart-button');
   const deleteButton = cardElement.querySelector('.element__delete-button');
 
-  likeButton.addEventListener('click', () => { likeButtonHandler(likeButton) });
-  deleteButton.addEventListener('click', () => { deleteButtonHandler(deleteButton) });
-  cardImage.addEventListener('click', (evt) => { cardImageHandler(card.link, card.name); });
+  likeButton.addEventListener('click', () => { handleLikeButton(likeButton) });
+  deleteButton.addEventListener('click', () => { handleDeleteButton(deleteButton) });
+  cardImage.addEventListener('click', (evt) => { handleCardImage(card.link, card.name); });
 
   cardImage.src = card.link;
   cardImage.alt = card.name;
@@ -99,23 +108,21 @@ window.addEventListener("load", (evt) => {
   });
 });
 
-
-formSubmitHandlerEdit = (evt) => {
+const handleFormSubmitEdit = (evt) => {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(popupEdit);
 }
 
-formSubmitHandlerAdd = (evt) => {
+const handleFormSubmitAdd = (evt) => {
   evt.preventDefault();
   const card = {
     name: inputTitle.value,
     link: inputLink.value
   };
   renderCard(createNewCard(card), cardElements, 'start');
-  inputTitle.value = '';
-  inputLink.value = '';
+  evt.target.reset();
   closePopup(popupAdd);
 }
 
@@ -127,20 +134,7 @@ editButton.addEventListener('click', () => {
 addButton.addEventListener('click', () => {
   showPopup(popupAdd)
 });
-//galleryItem.addEventListener('click', () => { showPopup(popupGallery) });
-closeButtonEdit.addEventListener('click', () => {
-  inputName.value = '';
-  inputJob.value = '';
-  closePopup(popupEdit);
-});
-closeButtonAdd.addEventListener('click', () => {
-  inputTitle.value = '';
-  inputLink.value = '';
-  closePopup(popupAdd);
-});
-closeButtonGallery.addEventListener('click', () => {
-  closePopup(popupGallery);
-});
-formElementEdit.addEventListener('submit', formSubmitHandlerEdit);
-formElementAdd.addEventListener('submit', formSubmitHandlerAdd);
+
+formElementEdit.addEventListener('submit', handleFormSubmitEdit);
+formElementAdd.addEventListener('submit', handleFormSubmitAdd);
 
