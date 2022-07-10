@@ -1,4 +1,3 @@
-
 const showInputError = (inputElement, errorElement, inputErrorClass, errorClass, errorMessage) => {
     inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
@@ -26,7 +25,6 @@ const setEventListeners = (formElement, inputList, inputErrorClass, errorClass, 
         inputElement.addEventListener('input', () => {
             checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
             toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-
         });
     });
 };

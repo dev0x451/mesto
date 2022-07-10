@@ -46,9 +46,10 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const cardTemplate = document.querySelector('#card-template').content;
 const cardElements = document.querySelector('.elements');
-// находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
+//сразу запишем в поля ввода значения из разметки, чтобы при открытии попапа валидация 
+//сразу сработала правильно...
 inputName.value = profileName.textContent;
 inputJob.value = profileJob.textContent;
 
@@ -71,8 +72,6 @@ closeButtons.forEach((button) => {
   });
 });
 
-
-
 showPopup = (popup) => {
   popup.classList.add('popup_opened');
   popup.focus();
@@ -89,7 +88,6 @@ const handleEsc = (evt) => {
   if (evt.key === 'Escape') {
     closePopup(evt.target);
     resetValidation(setupObj);
-
   }
 
 }
@@ -100,7 +98,6 @@ Array.from(popupOverlays).forEach((popup) => {
     closePopup(evt.target);
     if (evt.target === evt.currentTarget)
       resetValidation(setupObj);
-
   });
 
 });
