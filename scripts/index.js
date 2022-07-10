@@ -109,14 +109,12 @@ window.addEventListener("load", (evt) => {
 });
 
 const handleFormSubmitEdit = (evt) => {
-  evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(popupEdit);
 }
 
 const handleFormSubmitAdd = (evt) => {
-  evt.preventDefault();
   const card = {
     name: inputTitle.value,
     link: inputLink.value
@@ -132,9 +130,17 @@ editButton.addEventListener('click', () => {
   showPopup(popupEdit);
 });
 addButton.addEventListener('click', () => {
-  showPopup(popupAdd)
+  showPopup(popupAdd);
 });
 
 formElementEdit.addEventListener('submit', handleFormSubmitEdit);
 formElementAdd.addEventListener('submit', handleFormSubmitAdd);
 
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});

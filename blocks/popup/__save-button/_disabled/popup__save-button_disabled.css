@@ -1,0 +1,7 @@
+.popup__save-button_disabled, .popup__save-button_disabled:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px #000 solid;
+    opacity: .2;
+    cursor: default;
+}
