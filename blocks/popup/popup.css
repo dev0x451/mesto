@@ -15,3 +15,8 @@
   align-items: center;
   z-index: 1;
 }
+
+.popup:hover {
+  cursor: pointer;
+
+}

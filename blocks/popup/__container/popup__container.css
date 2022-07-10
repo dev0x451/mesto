@@ -6,6 +6,7 @@
   width: 430px;
   height: 330px;
   border-radius: 10px;
+  cursor: default;
 }
 
 @media screen and (max-width: 560px) {

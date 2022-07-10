@@ -25,6 +25,7 @@ const initialCards = [
   }
 ];
 
+const popupOverlays = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const popupGallery = document.querySelector('.popup-gallery');
@@ -48,21 +49,61 @@ const cardElements = document.querySelector('.elements');
 // находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
+inputName.value = profileName.textContent;
+inputJob.value = profileJob.textContent;
+
+const setupObj = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 closeButtons.forEach((button) => {
   // находим 1 раз ближайший к крестику попап 
   const popup = button.closest('.popup');
   // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
+  button.addEventListener('click', (evt) => {
+    closePopup(popup);
+    resetValidation(setupObj);
+  });
 });
+
+
 
 showPopup = (popup) => {
   popup.classList.add('popup_opened');
+  popup.focus();
+  popup.addEventListener('keydown', handleEsc);
 }
 
 closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  popup.removeEventListener('keydown', handleEsc);
 }
 
+//закрытие попап по Esc
+const handleEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(evt.target);
+    resetValidation(setupObj);
+
+  }
+
+}
+
+//закрытие попап по клику на оверлей
+Array.from(popupOverlays).forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    closePopup(evt.target);
+    if (evt.target === evt.currentTarget)
+      resetValidation(setupObj);
+
+  });
+
+});
 
 const handleLikeButton = (button) => {
   button.querySelector('.element__heart-icon').classList.toggle('element__heart-icon_active');
@@ -93,7 +134,7 @@ const createNewCard = (card) => {
 
   likeButton.addEventListener('click', () => { handleLikeButton(likeButton) });
   deleteButton.addEventListener('click', () => { handleDeleteButton(deleteButton) });
-  cardImage.addEventListener('click', (evt) => { handleCardImage(card.link, card.name); });
+  cardImage.addEventListener('click', () => { handleCardImage(card.link, card.name); });
 
   cardImage.src = card.link;
   cardImage.alt = card.name;
@@ -101,7 +142,8 @@ const createNewCard = (card) => {
   return cardElement;
 }
 
-//загрузим все карточки из массива когда весь документ прогрузится
+//загрузим все карточки из массива ,
+// когда весь документ прогрузится
 window.addEventListener("load", (evt) => {
   initialCards.forEach(card => {
     renderCard(createNewCard(card), cardElements, 'end');
@@ -111,6 +153,7 @@ window.addEventListener("load", (evt) => {
 const handleFormSubmitEdit = (evt) => {
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
+  resetValidation(setupObj);
   closePopup(popupEdit);
 }
 
@@ -120,8 +163,8 @@ const handleFormSubmitAdd = (evt) => {
     link: inputLink.value
   };
   renderCard(createNewCard(card), cardElements, 'start');
-  evt.target.reset();
   closePopup(popupAdd);
+  resetValidation(setupObj);
 }
 
 editButton.addEventListener('click', () => {
@@ -136,11 +179,4 @@ addButton.addEventListener('click', () => {
 formElementEdit.addEventListener('submit', handleFormSubmitEdit);
 formElementAdd.addEventListener('submit', handleFormSubmitAdd);
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-});
+enableValidation(setupObj);

@@ -1,13 +1,13 @@
 
 const showInputError = (inputElement, errorElement, inputErrorClass, errorClass, errorMessage) => {
-    inputElement.classList.add(`${inputErrorClass}`);
+    inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(`${errorClass}`);
+    errorElement.classList.add(errorClass);
 };
 
 const hideInputError = (inputElement, errorElement, inputErrorClass, errorClass) => {
-    inputElement.classList.remove(`${inputErrorClass}`);
-    errorElement.classList.remove(`${errorClass}`);
+    inputElement.classList.remove(inputErrorClass);
+    errorElement.classList.remove(errorClass);
     errorElement.textContent = '';
 };
 
@@ -23,7 +23,7 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
 
 const setEventListeners = (formElement, inputList, inputErrorClass, errorClass, buttonElement, inactiveButtonClass) => {
     inputList.forEach((inputElement) => {
-        inputElement.addEventListener('input', function () {
+        inputElement.addEventListener('input', () => {
             checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
             toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 
@@ -39,18 +39,14 @@ const hasInvalidInput = (inputList) => {
 
 }
 
-// Функция принимает массив полей ввода
-// и элемент кнопки, состояние которой нужно менять
-
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
 
-    // // Если есть хотя бы один невалидный инпут
     if (hasInvalidInput(inputList)) {
-        //     // сделай кнопку неактивной
-        buttonElement.classList.add(`${inactiveButtonClass}`);
+        buttonElement.classList.add(inactiveButtonClass);
+        buttonElement.setAttribute('disabled', '');
     } else {
-        //     // иначе сделай кнопку активной
-        buttonElement.classList.remove(`${inactiveButtonClass}`);
+        buttonElement.classList.remove(inactiveButtonClass);
+        buttonElement.removeAttribute('disabled');
     }
 };
 
@@ -59,11 +55,11 @@ const enableValidation = (objSetup) => {
         inactiveButtonClass, inputErrorClass, errorClass } = objSetup;
 
 
-    const formList = Array.from(document.querySelectorAll(`${formSelector}`));
+    const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach((formElement) => {
 
-        const inputList = Array.from(formElement.querySelectorAll(`${inputSelector}`));
-        const buttonElement = formElement.querySelector(`${submitButtonSelector}`);
+        const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+        const buttonElement = formElement.querySelector(submitButtonSelector);
         formElement.addEventListener('submit', function (evt) {
             evt.preventDefault();
         });
@@ -71,6 +67,33 @@ const enableValidation = (objSetup) => {
         setEventListeners(formElement, inputList, inputErrorClass, errorClass, buttonElement, inactiveButtonClass);
 
         //сразу провалидируем кнопку submit
+        toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+
+    });
+
+};
+
+
+const resetValidation = (objSetup) => {
+    const { formSelector, inputSelector, submitButtonSelector,
+        inactiveButtonClass, inputErrorClass, errorClass } = objSetup;
+    const formList = Array.from(document.querySelectorAll(formSelector));
+
+    formList.forEach((formElement) => {
+        const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+        const buttonElement = formElement.querySelector(submitButtonSelector);
+
+        inputList.forEach((inputElement) => {
+            const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+            hideInputError(inputElement, errorElement, inputErrorClass, errorClass);
+        });
+
+        //очищаем форму
+        formElement.reset();
+
+        inputName.value = profileName.textContent;
+        inputJob.value = profileJob.textContent;
+
         toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 
     });
