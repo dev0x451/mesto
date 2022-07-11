@@ -35,9 +35,6 @@ const formElementEdit = document.querySelector('.popup__form_edit');
 const formElementAdd = document.querySelector('.popup__form_add');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const closeButtonEdit = document.querySelector('.popup__close-button_edit');
-const closeButtonAdd = document.querySelector('.popup__close-button_add');
-const closeButtonGallery = document.querySelector('.popup-gallery__close-button');
 const inputName = document.querySelector('.popup__input_name');
 const inputJob = document.querySelector('.popup__input_job');
 const inputTitle = document.querySelector('.popup__input_title');
@@ -68,14 +65,24 @@ closeButtons.forEach((button) => {
   // устанавливаем обработчик закрытия на крестик
   button.addEventListener('click', (evt) => {
     closePopup(popup);
-    resetValidation(setupObj);
   });
+
+  //крестик получает ненужный фокус после наведения на него мыши (без клика), 
+  //из-за чего перестает отлавливаться нажатие на Esc, поэтому
+  //отловим событие фокуса и уведем фокус на сам попап
+  button.addEventListener('focus', (evt) => {
+    popup.focus();
+  });
+
 });
 
 showPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  popup.focus();
+  resetValidation(setupObj);
   popup.addEventListener('keydown', handleEsc);
+  popup.addEventListener('transitionend', (event) => {
+    event.target.focus();
+  });
+  popup.classList.add('popup_opened');
 }
 
 closePopup = (popup) => {
@@ -87,7 +94,6 @@ closePopup = (popup) => {
 const handleEsc = (evt) => {
   if (evt.key === 'Escape') {
     closePopup(evt.target);
-    resetValidation(setupObj);
   }
 
 }
@@ -96,8 +102,6 @@ const handleEsc = (evt) => {
 Array.from(popupOverlays).forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     closePopup(evt.target);
-    if (evt.target === evt.currentTarget)
-      resetValidation(setupObj);
   });
 
 });
@@ -150,7 +154,6 @@ window.addEventListener("load", (evt) => {
 const handleFormSubmitEdit = (evt) => {
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-  resetValidation(setupObj);
   closePopup(popupEdit);
 }
 
@@ -161,7 +164,6 @@ const handleFormSubmitAdd = (evt) => {
   };
   renderCard(createNewCard(card), cardElements, 'start');
   closePopup(popupAdd);
-  resetValidation(setupObj);
 }
 
 editButton.addEventListener('click', () => {

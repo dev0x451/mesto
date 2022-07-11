@@ -8,14 +8,12 @@
 
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity .3s ease-in;
+  transition: visibility .3s, opacity .3s ease-in;
+  /* transition: visibility 0s, opacity .3s ease-in; */
 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
-}
-
-.popup:hover {
   cursor: pointer;
 }

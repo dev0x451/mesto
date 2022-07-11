@@ -10,6 +10,31 @@
 
 <body class="page" aria-label="проект Место">
 
+
+  <div class="page__container">
+    <header class="header">
+      <img class="header__logo" src="images/mesto-logo.svg" alt="логотип Mesto Russia">
+    </header>
+    <main>
+      <section class="profile" aria-label="профиль">
+        <div class="profile__info-container">
+          <img class="profile__avatar" src="images/Avatar-Custo.png" alt="Жан Жак Кусто">
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
+            <button type="button" class="profile__edit-button"></button>
+            <p class="profile__job">Исследователь океана</p>
+          </div>
+        </div>
+        <button type="button" class="profile__add-button"></button>
+      </section>
+      <section class="elements" aria-label="карточки">
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">© 2022 Mesto Russia</p>
+    </footer>
+  </div>
+
   <!-- попап редактирования юзера -->
   <div class="popup popup_edit" tabindex="-1">
     <div class="popup__container">
@@ -63,29 +88,8 @@
     </div>
   </div>
 
-  <div class="page__container">
-    <header class="header">
-      <img class="header__logo" src="images/mesto-logo.svg" alt="логотип Mesto Russia">
-    </header>
-    <main>
-      <section class="profile" aria-label="профиль">
-        <div class="profile__info-container">
-          <img class="profile__avatar" src="images/Avatar-Custo.png" alt="Жан Жак Кусто">
-          <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
-            <button type="button" class="profile__edit-button"></button>
-            <p class="profile__job">Исследователь океана</p>
-          </div>
-        </div>
-        <button type="button" class="profile__add-button"></button>
-      </section>
-      <section class="elements" aria-label="карточки">
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__text">© 2020 Mesto Russia</p>
-    </footer>
-  </div>
+
+
   <template id="card-template">
     <article class="element">
       <img class="element__image" src="images/placeholder.jpg" alt="">
