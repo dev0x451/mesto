@@ -1,3 +1,6 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -25,31 +28,6 @@ const initialCards = [
   }
 ];
 
-const popupOverlays = document.querySelectorAll('.popup');
-const popupEdit = document.querySelector('.popup_edit');
-const popupAdd = document.querySelector('.popup_add');
-const popupGallery = document.querySelector('.popup-gallery');
-const popupGalleryImage = popupGallery.querySelector('.popup-gallery__image');
-const popupGalleryCaption = popupGallery.querySelector('.popup-gallery__caption');
-const formElementEdit = document.querySelector('.popup__form_edit');
-const formElementAdd = document.querySelector('.popup__form_add');
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-const inputName = document.querySelector('.popup__input_name');
-const inputJob = document.querySelector('.popup__input_job');
-const inputTitle = document.querySelector('.popup__input_title');
-const inputLink = document.querySelector('.popup__input_link');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-const cardTemplate = document.querySelector('#card-template').content;
-const cardElements = document.querySelector('.elements');
-const closeButtons = document.querySelectorAll('.popup__close-button');
-
-//сразу запишем в поля ввода значения из разметки, чтобы при открытии попапа валидация 
-//сразу сработала правильно...
-inputName.value = profileName.textContent;
-inputJob.value = profileJob.textContent;
-
 const setupObj = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -58,6 +36,34 @@ const setupObj = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+
+
+const popupOverlays = document.querySelectorAll('.popup');
+const popupEdit = document.querySelector('.popup_edit');
+const popupAdd = document.querySelector('.popup_add');
+const popupGallery = document.querySelector('.popup-gallery');
+
+const formList = Array.from(document.querySelectorAll(setupObj.formSelector));
+const formElementEdit = document.querySelector('.popup__form_edit');
+const formElementAdd = document.querySelector('.popup__form_add');
+
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+const inputName = document.querySelector('.popup__input_name');
+const inputJob = document.querySelector('.popup__input_job');
+const inputTitle = document.querySelector('.popup__input_title');
+const inputLink = document.querySelector('.popup__input_link');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const closeButtons = document.querySelectorAll('.popup__close-button');
+const cardElements = document.querySelector('.elements');
+
+
+//запишем в поля ввода значения из разметки, чтобы при открытии попапа редактирования валидация 
+//сразу сработала правильно...
+inputName.value = profileName.textContent;
+inputJob.value = profileJob.textContent;
+
 
 closeButtons.forEach((button) => {
   // находим 1 раз ближайший к крестику попап 
@@ -76,8 +82,27 @@ closeButtons.forEach((button) => {
 
 });
 
-showPopup = (popup) => {
-  resetValidation(setupObj);
+const showPopup = (popup) => {
+
+  //пройдемся по всем формам, сбросим валидацию и  очистим поля ввода
+  formsValidationList.forEach((formVal) => {
+    formVal.resetValidation(true);
+
+  });
+
+  //// возьмем значения полей ввода из разметки
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
+  ////
+
+  //еще раз пройдемся по всем формам, но уже не будем очищать поля ввода, чтобы кнопка Сохранить
+  //в попапе редактирования профиля была активна сразу после открытия попапа
+  formsValidationList.forEach((formVal) => {
+    formVal.resetValidation(false);
+
+  });
+
+
   popup.addEventListener('keydown', handleEsc);
   popup.addEventListener('transitionend', (event) => {
     event.target.focus();
@@ -85,12 +110,23 @@ showPopup = (popup) => {
   popup.classList.add('popup_opened');
 }
 
-closePopup = (popup) => {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   popup.removeEventListener('keydown', handleEsc);
 }
 
-//закрытие попап по Esc
+
+//хэндлер на клик по картинке карточки
+const handleCardImage = (imageLink, caption) => {
+
+  popupGallery.querySelector('.popup-gallery__image').src = imageLink;
+  popupGallery.querySelector('.popup-gallery__image').alt = caption;
+  popupGallery.querySelector('.popup-gallery__caption').textContent = caption;
+
+  showPopup(popupGallery);
+}
+
+//закрытие попапа по Esc
 const handleEsc = (evt) => {
   if (evt.key === 'Escape') {
     closePopup(evt.target);
@@ -98,56 +134,29 @@ const handleEsc = (evt) => {
 
 }
 
-//закрытие попап по клику на оверлей
-Array.from(popupOverlays).forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    closePopup(evt.target);
+//закрытие всех попапов по клику на оверлей
+Array.from(popupOverlays).forEach((popupOverlay) => {
+  popupOverlay.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) closePopup(evt.target);
   });
 
 });
 
-const handleLikeButton = (button) => {
-  button.querySelector('.element__heart-icon').classList.toggle('element__heart-icon_active');
-}
-
-const handleDeleteButton = (button) => {
-  button.closest('.element').remove();
-}
-
-const handleCardImage = (imageLink, caption) => {
-  popupGalleryImage.src = imageLink;
-  popupGalleryImage.alt = caption;
-  popupGalleryCaption.textContent = caption;
-  showPopup(popupGallery);
-}
 
 const renderCard = (cardElement, container, position) => {
   if (position === 'start') container.prepend(cardElement)
   else if (position === 'end') container.append(cardElement);
 }
 
-const createNewCard = (card) => {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  const cardImage = cardElement.querySelector('.element__image');
-  const cardDescription = cardElement.querySelector('.element__name');
-  const likeButton = cardElement.querySelector('.element__heart-button');
-  const deleteButton = cardElement.querySelector('.element__delete-button');
-
-  likeButton.addEventListener('click', () => { handleLikeButton(likeButton) });
-  deleteButton.addEventListener('click', () => { handleDeleteButton(deleteButton) });
-  cardImage.addEventListener('click', () => { handleCardImage(card.link, card.name); });
-
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-  cardDescription.textContent = card.name;
-  return cardElement;
-}
 
 //загрузим все карточки из массива ,
 // когда весь документ прогрузится
 window.addEventListener("load", (evt) => {
   initialCards.forEach(card => {
-    renderCard(createNewCard(card), cardElements, 'end');
+
+    const theCard = new Card(card, '#card-template', handleCardImage);
+
+    renderCard(theCard.generateCard(), cardElements, 'end');
   });
 });
 
@@ -158,13 +167,16 @@ const handleFormSubmitEdit = (evt) => {
 }
 
 const handleFormSubmitAdd = (evt) => {
-  const card = {
+  const newCard = new Card({
     name: inputTitle.value,
     link: inputLink.value
-  };
-  renderCard(createNewCard(card), cardElements, 'start');
+  }, '#card-template');
+
+  renderCard(newCard.generateCard(), cardElements, 'start');
   closePopup(popupAdd);
 }
+
+
 
 editButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
@@ -178,4 +190,12 @@ addButton.addEventListener('click', () => {
 formElementEdit.addEventListener('submit', handleFormSubmitEdit);
 formElementAdd.addEventListener('submit', handleFormSubmitAdd);
 
-enableValidation(setupObj);
+
+//создадим объекты валидации форм
+const formsValidationList = [];
+formList.forEach((formElement) => {
+  const formValidation = new FormValidator(setupObj, formElement);
+  formValidation.enableValidation();
+  formsValidationList.push(formValidation);
+});
+
