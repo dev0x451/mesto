@@ -1,3 +1,7 @@
 .element__heart-button_active {
   background-image: url('../../../../images/Heart-Icon-Active.svg');
 }
+
+.element__heart-button_active:hover {
+  opacity: 1;
+}

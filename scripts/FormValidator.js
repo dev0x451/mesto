@@ -1,6 +1,5 @@
 export class FormValidator {
     constructor(setup, formElement) {
-        this._formSelector = setup.formSelector;
         this._inputSelector = setup.inputSelector;
         this._submitButtonSelector = setup.submitButtonSelector;
         this._inactiveButtonClass = setup.inactiveButtonClass;
@@ -29,7 +28,7 @@ export class FormValidator {
 
     _toggleButtonState() {
 
-        if (this._hasInvalidInput(this._inputList)) {
+        if (this._hasInvalidInput()) {
             this._buttonElement.classList.add(this._inactiveButtonClass);
             this._buttonElement.setAttribute('disabled', '');
         } else {
@@ -74,11 +73,9 @@ export class FormValidator {
         this._formElement.addEventListener('submit', function (evt) {
             evt.preventDefault();
         });
-
         this._setEventListeners();
 
     };
-
 
     resetValidation(reset) {
 
@@ -89,7 +86,6 @@ export class FormValidator {
 
         //очищаем форму
         if (reset) this._formElement.reset();
-
         this._toggleButtonState();
     };
 
