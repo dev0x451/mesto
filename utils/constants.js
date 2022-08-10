@@ -1,3 +1,13 @@
+export const setupObj = {
+    //formSelector: '.popup__form', - по факту не нужен, можно удалить
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+};
+
+
 export const initialCards = [
     {
         name: 'Архыз',
