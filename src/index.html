@@ -5,20 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>проект Mesto</title>
-  <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page" aria-label="проект Место">
-
-
   <div class="page__container">
     <header class="header">
-      <img class="header__logo" src="images/mesto-logo.svg" alt="логотип Mesto Russia">
+      <img class="header__logo" src="<%=require('./images/mesto-logo.svg')%>" alt="логотип Mesto Russia">
     </header>
     <main>
       <section class="profile" aria-label="профиль">
         <div class="profile__info-container">
-          <img class="profile__avatar" src="images/Avatar-Custo.png" alt="Жан Жак Кусто">
+          <img class="profile__avatar" src="<%=require('./images/Avatar-Custo.png')%>" alt="Жан Жак Кусто">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
             <button type="button" class="profile__edit-button"></button>
@@ -50,7 +47,6 @@
             maxlength="200">
           <span class="popup__error input-job-error"></span>
         </label>
-
         <button class="popup__save-button" type="submit" name="save-button">Сохранить</button>
       </form>
       <button type="button" class="popup__close-button popup__close-button_edit"></button>
@@ -66,7 +62,6 @@
             placeholder="Название" required minlength="2" maxlength="30">
           <span class="popup__error input-title-error"></span>
         </label>
-
         <label for="input-link" class="popup__form-label">
           <input class="popup__input popup__input_link" type="url" name="link" id="input-link"
             placeholder="Ссылка на картинку" required>
@@ -83,14 +78,14 @@
     <div class="popup-gallery__container">
       <div class="popup__close-button popup-gallery__close-button">
       </div>
-      <img class="popup-gallery__image" src="images/placeholder.jpg" alt="">
+      <img class="popup-gallery__image" src="<%=require('./images/placeholder.jpg')%>" alt="">
       <p class="popup-gallery__caption"></p>
     </div>
   </div>
 
   <template id="card-template">
     <article class="element">
-      <img class="element__image" src="images/placeholder.jpg" alt="">
+      <img class="element__image" src="<%=require('./images/placeholder.jpg')%>" alt="">
       <button class="element__delete-button" type="button">
       </button>
       <div class="element__description">
@@ -101,7 +96,6 @@
     </article>
   </template>
 
-  <script type="module" src="pages/index.js"></script>
 </body>
 
 </html>
