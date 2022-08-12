@@ -77,15 +77,13 @@ export class FormValidator {
 
     };
 
-    resetValidation(reset) {
+    resetValidation() {
 
         this._inputList.forEach((inputElement) => {
             const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
             this._hideInputError(inputElement, errorElement);
         })
 
-        //очищаем форму
-        if (reset) this._formElement.reset();
         this._toggleButtonState();
     };
 
