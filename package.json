@@ -4,7 +4,7 @@
   "description": "Это учебный проект на курсе веб-разработка Яндекс.Практикум. Он позволяет просматривать карточки и редактировать имя и род занятий человека, а также добавлять и удалять карточки мест, ставить лайки. В проекте использвуются базовые и расширенные возможности HTML/CSS, применена адаптивная верстка, а также методология БЭМ. Используются базовые возможности Javascript, реализована динамическая валидация форм.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "rimraf ./dist && webpack --mode production",
     "dev": "webpack serve --open"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.0.1",
+    "rimraf": "^3.0.2",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.10.0"

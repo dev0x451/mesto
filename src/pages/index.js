@@ -2,7 +2,7 @@
 import { Section } from '../components/Section.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
-import { initialCards, setupObj } from '../utils/constants.js';
+import { initialCards, setupObj, cardsContainerSelector, cardTemplateSelector } from '../utils/constants.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
@@ -12,8 +12,6 @@ const formElementEdit = document.querySelector('.popup__form_edit');
 const formElementAdd = document.querySelector('.popup__form_add');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
-const cardsContainerSelector = '.elements';
-const cardTemplateSelector = '#card-template';
 
 //хэндлер на клик по картинке карточки
 const handleCardClick = (imageLink, caption) => {
@@ -21,18 +19,26 @@ const handleCardClick = (imageLink, caption) => {
 
 }
 
+function createCard(item) {
+  const cardElement = new Card(item, cardTemplateSelector, handleCardClick);
+
+  return cardElement.generateCard()
+}
+
 //загрузим все карточки из массива
 const cardsSection = new Section({
   items: initialCards, renderer: (item) => {
-    const theCard = new Card(item, cardTemplateSelector, handleCardClick);
-    cardsSection.addItem(theCard.generateCard());
+    const theCard = createCard(item);
+    cardsSection.addItem(theCard);
   }
 }, cardsContainerSelector);
 cardsSection.renderItems();
 
 const handleFormSubmitAdd = (formValues) => {
-  const newCard = new Card(formValues, cardTemplateSelector, handleCardClick);
-  cardsSection.addItem(newCard.generateCard(), true);
+
+  const newCard = createCard(formValues);
+  cardsSection.addItem(newCard, true);
+
   thePopupAdd.close();
 }
 

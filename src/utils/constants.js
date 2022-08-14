@@ -1,3 +1,7 @@
+export const cardsContainerSelector = '.elements';
+export const cardTemplateSelector = '#card-template';
+
+
 export const setupObj = {
   //formSelector: '.popup__form', - по факту не нужен, можно удалить
   inputSelector: '.popup__input',
