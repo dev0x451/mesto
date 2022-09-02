@@ -15,11 +15,13 @@
     <main>
       <section class="profile" aria-label="профиль">
         <div class="profile__info-container">
-          <img class="profile__avatar" src="<%=require('./images/Avatar-Custo.png')%>" alt="Жан Жак Кусто">
+          <div class="profile__avatar-container">
+            <img class="profile__avatar" src="" alt="">
+          </div>
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__edit-button"></button>
-            <p class="profile__job">Исследователь океана</p>
+            <p class="profile__job"></p>
           </div>
         </div>
         <button type="button" class="profile__add-button"></button>
@@ -49,17 +51,45 @@
         </label>
         <button class="popup__save-button" type="submit" name="save-button">Сохранить</button>
       </form>
-      <button type="button" class="popup__close-button popup__close-button_edit"></button>
+      <button type="button" class="popup__close-button"></button>
     </div>
   </div>
+
+  <!-- попап обновления аватара -->
+  <div class="popup popup_avatar" tabindex="-1">
+    <div class="popup__container">
+      <h3 class="popup__heading">Обновить аватар</h3>
+      <form class="popup__form popup__form_avatar" name="avatar-form" novalidate>
+        <label for="input-avatar" class="popup__form-label">
+          <input class="popup__input popup__input_avatar" type="url" name="avatar" id="input-avatar" required>
+          <span class="popup__error input-avatar-error"></span>
+        </label>
+        <button class="popup__save-button" type="submit" name="save-button">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button"></button>
+    </div>
+  </div>
+
+  <!-- попап 'вы уверены?' -->
+  <div class="popup popup_confirm" tabindex="-1">
+    <div class="popup__container">
+      <h3 class="popup__heading">Вы уверены?</h3>
+      <form class="popup__form popup__form_confirm" name="confirm-form" novalidate>
+        <button class="popup__save-button" type="button" name="save-button">Да</button>
+      </form>
+      <button type="button" class="popup__close-button"></button>
+    </div>
+  </div>
+
+
   <!-- попап добавления места -->
   <div class="popup popup_add" tabindex="-1">
     <div class="popup__container">
       <h3 class=" popup__heading">Новое место</h3>
       <form class="popup__form popup__form_add" name="add-form" novalidate>
         <label for="input-title" class="popup__form-label">
-          <input class="popup__input popup__input_title" type="text" name="title" id="input-title"
-            placeholder="Название" required minlength="2" maxlength="30">
+          <input class="popup__input popup__input_title" type="text" name="name" id="input-title" placeholder="Название"
+            required minlength="2" maxlength="30">
           <span class="popup__error input-title-error"></span>
         </label>
         <label for="input-link" class="popup__form-label">
@@ -70,13 +100,13 @@
 
         <button class="popup__save-button" type="submit" name="create-button">Создать</button>
       </form>
-      <button type="button" class="popup__close-button popup__close-button_add"></button>
+      <button type="button" class="popup__close-button"></button>
     </div>
   </div>
   <!-- попап галереи -->
   <div class="popup popup-gallery" tabindex="-1">
     <div class="popup-gallery__container">
-      <div class="popup__close-button popup-gallery__close-button">
+      <div class="popup__close-button">
       </div>
       <img class="popup-gallery__image" src="<%=require('./images/placeholder.jpg')%>" alt="">
       <p class="popup-gallery__caption"></p>
@@ -90,8 +120,12 @@
       </button>
       <div class="element__description">
         <h2 class="element__name"></h2>
-        <button class="element__heart-button" type="button">
-        </button>
+
+        <div class="element__likes">
+          <button class="element__heart-button" type="button">
+          </button>
+          <div class="element__likes-count"></div>
+        </div>
       </div>
     </article>
   </template>

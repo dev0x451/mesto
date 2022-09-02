@@ -1,22 +1,23 @@
 .element__delete-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 0;
-    border-style: none;
-    background-color: transparent;
+  visibility: hidden;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0;
+  border-style: none;
+  background-color: transparent;
 
-    background-image: url('../../../images/Trash-icon.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    width: 18px;
-    height: 19px;
-    transition: opacity .2s ease-in;
+  background-image: url('../../../images/Trash-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 18px;
+  height: 19px;
+  transition: opacity .2s ease-in;
 
 }
 
 .element__delete-button:hover {
-    cursor: pointer;
-    opacity: .5;
+  cursor: pointer;
+  opacity: .5;
 }

@@ -1,0 +1,4 @@
+.element__likes {
+  display: flex;
+  flex-direction: column;
+}
