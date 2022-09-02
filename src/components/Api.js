@@ -6,17 +6,23 @@ export class Api {
     this._cards = [];
   }
 
+  _checkResponse(res) {
+
+    if (res.ok) {
+      return res.json()
+    }
+    else return Promise.reject(`Ошибка промиса: ${res.status}`)
+  }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: {
         authorization: this._authToken
       }
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('карточки не найдены на сервере')
+      })
 
   }
 
@@ -33,12 +39,11 @@ export class Api {
         name: cardName,
         link: cardLink
       })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('карточка не добавлена на сервер')
+      })
+
 
   }
 
@@ -49,12 +54,11 @@ export class Api {
       headers: {
         authorization: this._authToken
       }
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('карточка не удалена')
+      })
+
 
   }
 
@@ -67,12 +71,10 @@ export class Api {
         authorization: this._authToken,
         'Content-Type': 'application/json'
       }
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('пользователь не загружен')
+      })
 
 
   }
@@ -90,15 +92,13 @@ export class Api {
         name: userName,
         about: userAbout
       })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('пользователь не установлен')
+      })
+
 
   }
-
 
   setAvatar(avatarURL) {
 
@@ -111,12 +111,11 @@ export class Api {
       body: JSON.stringify({
         avatar: avatarURL
       })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('аватар не установлен')
+      })
+
 
   }
 
@@ -129,12 +128,11 @@ export class Api {
       headers: {
         authorization: this._authToken
       }
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('лайк не установлен')
+      })
+
   }
 
   removeLike(cardId) {
@@ -144,12 +142,11 @@ export class Api {
       headers: {
         authorization: this._authToken
       }
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else return Promise.reject(`Ошибка промиса: ${res.status}`)
-    })
+    }).then(this._checkResponse)
+      .catch(() => {
+        throw new Error('лайк не снят')
+      })
+
   }
 
 

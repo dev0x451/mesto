@@ -18,10 +18,8 @@ export class PopupConfirm extends Popup {
     this._confirmButton.textContent = caption;
   }
 
-  open() {
-
-    this.setConfirmButtonCaption(this._defaultConfirmButtonCaption);
-    super.open();
+  setDefaultConfirmButtonCaption() {
+    this._confirmButton.textContent = this._defaultConfirmButtonCaption;
 
   }
 

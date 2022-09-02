@@ -16,19 +16,28 @@ export class Card {
 
   _handleLikeButton(button) {
 
-    this._likeButton.classList.toggle('element__heart-button_active');
-    if (this._likeButton.classList.contains('element__heart-button_active')) {
+    if (!this._likeButton.classList.contains('element__heart-button_active')) {
       this._setLike(this._cardId).then((result) => {
 
+        this._likeButton.classList.add('element__heart-button_active');
         this._likesElement.textContent = result.likes.length;
 
-      });
+      })
+        .catch(() => {
+          console.log('ошибка установки лайка')
+        })
+
     }
     else {
       this._setDislike(this._cardId).then((result) => {
+        this._likeButton.classList.remove('element__heart-button_active');
         this._likesElement.textContent = result.likes.length;
 
-      });
+      })
+        .catch(() => {
+          console.log('ошибка снятия лайка')
+        })
+
     }
   }
 

@@ -52,6 +52,13 @@ Promise.all(allPromises).then((results) => {
       const newCard = createCard(card, false, true);
       cardsSection.addItem(newCard, true);
 
+    }).finally(() => {
+
+      setTimeout(() => {
+        thePopupAdd.setDefaultSubmitCaption();
+
+      }, 1200);
+
     })
 
 
@@ -72,10 +79,15 @@ Promise.all(allPromises).then((results) => {
       setTimeout(() => {
         thePopupEdit.close();
       }, 500);
-
-
       userInfo.setUserInfo(formValues.name, formValues.job, myUser._id);
-      thePopupEdit.close();
+    }).finally(() => {
+
+      setTimeout(() => {
+        thePopupEdit.setDefaultSubmitCaption();
+
+      }, 1200);
+
+
     })
 
   }
@@ -95,6 +107,13 @@ Promise.all(allPromises).then((results) => {
 
         }, 500);
 
+      }).finally(() => {
+
+        setTimeout(() => {
+          thePopupAvatar.setDefaultSubmitCaption();
+
+        }, 1200);
+
       })
 
   }
@@ -112,6 +131,14 @@ Promise.all(allPromises).then((results) => {
           cardInstance.removeCard();
           thePopupConfirm.close();
         }, 500);
+
+      }).finally(() => {
+
+        setTimeout(() => {
+          thePopupConfirm.setDefaultConfirmButtonCaption();
+
+        }, 1200);
+
 
       })
 

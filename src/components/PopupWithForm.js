@@ -30,21 +30,18 @@ export class PopupWithForm extends Popup {
     this._submitButton.textContent = caption;
   }
 
+  setDefaultSubmitCaption() {
+    this._submitButton.textContent = this._defaultSubmitButtonCaption;
+
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._formElement.addEventListener('submit', (evt) => {
+
       evt.preventDefault();
-
       this._formSubmitHandle(this._getInputValues());
-      this._formElement.reset();
-
     });
-  }
-
-  open() {
-    this.setSubmitCaption(this._defaultSubmitButtonCaption);
-    super.open();
-
   }
 
   close() {
