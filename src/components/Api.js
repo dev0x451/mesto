@@ -20,9 +20,6 @@ export class Api {
         authorization: this._authToken
       }
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('карточки не найдены на сервере')
-      })
 
   }
 
@@ -40,9 +37,6 @@ export class Api {
         link: cardLink
       })
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('карточка не добавлена на сервер')
-      })
 
 
   }
@@ -55,14 +49,9 @@ export class Api {
         authorization: this._authToken
       }
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('карточка не удалена')
-      })
 
 
   }
-
-
 
   getUser() {
 
@@ -72,10 +61,6 @@ export class Api {
         'Content-Type': 'application/json'
       }
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('пользователь не загружен')
-      })
-
 
   }
 
@@ -93,10 +78,6 @@ export class Api {
         about: userAbout
       })
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('пользователь не установлен')
-      })
-
 
   }
 
@@ -112,14 +93,9 @@ export class Api {
         avatar: avatarURL
       })
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('аватар не установлен')
-      })
 
 
   }
-
-
 
   setLike(cardId) {
 
@@ -129,10 +105,6 @@ export class Api {
         authorization: this._authToken
       }
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('лайк не установлен')
-      })
-
   }
 
   removeLike(cardId) {
@@ -143,12 +115,5 @@ export class Api {
         authorization: this._authToken
       }
     }).then(this._checkResponse)
-      .catch(() => {
-        throw new Error('лайк не снят')
-      })
-
   }
-
-
-  // другие методы работы с API
 }

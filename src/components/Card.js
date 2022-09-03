@@ -23,8 +23,8 @@ export class Card {
         this._likesElement.textContent = result.likes.length;
 
       })
-        .catch(() => {
-          console.log('ошибка установки лайка')
+        .catch((err) => {
+          console.log('ошибка установки лайка: ', err)
         })
 
     }
@@ -34,8 +34,8 @@ export class Card {
         this._likesElement.textContent = result.likes.length;
 
       })
-        .catch(() => {
-          console.log('ошибка снятия лайка')
+        .catch((err) => {
+          console.log('ошибка снятия лайка: ', err)
         })
 
     }

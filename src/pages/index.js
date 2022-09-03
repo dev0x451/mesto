@@ -20,15 +20,9 @@ const buttonAdd = document.querySelector('.profile__add-button');
 
 const api = new Api({ url: 'https://mesto.nomoreparties.co/v1/cohort-49', token: '4a3a5ed7-c33c-4007-ab2f-bb1055621552' });
 
-const userPromise = api.getUser();
-const cardsPromise = api.getInitialCards();
+Promise.all([api.getInitialCards(), api.getUser()]).then((results) => {
 
-const allPromises = [cardsPromise, userPromise];
-
-Promise.all(allPromises).then((results) => {
-
-  const cardsData = results[0];
-  const myUser = results[1];
+  const [cardsData, myUser] = results;
 
   const userInfo = new UserInfo({ nameSelector: '.profile__name', jobSelector: '.profile__job', avatarSelector: '.profile__avatar' });
 
@@ -52,14 +46,18 @@ Promise.all(allPromises).then((results) => {
       const newCard = createCard(card, false, true);
       cardsSection.addItem(newCard, true);
 
-    }).finally(() => {
-
-      setTimeout(() => {
-        thePopupAdd.setDefaultSubmitCaption();
-
-      }, 1200);
-
     })
+      .catch((err) => {
+        console.log('ошибка добавления карточки: ', err);
+      })
+      .finally(() => {
+
+        setTimeout(() => {
+          thePopupAdd.setDefaultSubmitCaption();
+
+        }, 1200);
+
+      })
 
 
   }
@@ -80,15 +78,20 @@ Promise.all(allPromises).then((results) => {
         thePopupEdit.close();
       }, 500);
       userInfo.setUserInfo(formValues.name, formValues.job, myUser._id);
-    }).finally(() => {
-
-      setTimeout(() => {
-        thePopupEdit.setDefaultSubmitCaption();
-
-      }, 1200);
-
-
     })
+      .catch((err) => {
+        console.log('ошибка сохранения данных профиля: ', err);
+      })
+
+      .finally(() => {
+
+        setTimeout(() => {
+          thePopupEdit.setDefaultSubmitCaption();
+
+        }, 1200);
+
+
+      })
 
   }
 
@@ -107,7 +110,11 @@ Promise.all(allPromises).then((results) => {
 
         }, 500);
 
-      }).finally(() => {
+      })
+      .catch((err) => {
+        console.log('ошибка обновления аватара: ', err);
+      })
+      .finally(() => {
 
         setTimeout(() => {
           thePopupAvatar.setDefaultSubmitCaption();
@@ -132,7 +139,12 @@ Promise.all(allPromises).then((results) => {
           thePopupConfirm.close();
         }, 500);
 
-      }).finally(() => {
+      })
+      .catch((err) => {
+        console.log('ошибка удаления карточки: ', err);
+      })
+
+      .finally(() => {
 
         setTimeout(() => {
           thePopupConfirm.setDefaultConfirmButtonCaption();
@@ -246,6 +258,7 @@ Promise.all(allPromises).then((results) => {
 
 })
 
+  //кэтч для Promise ALL
   .catch((err) => {
-    console.log('ошибка кэтч: ' + err); // выведем ошибку в консоль
+    console.log('ошибка Promise all (не загружены карточки или профиль): ' + err); // выведем ошибку в консоль
   });
