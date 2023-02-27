@@ -6,19 +6,18 @@
   "scripts": {
     "build": "rimraf ./dist && webpack --mode production",
     "dev": "webpack serve --open",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sigma696/mesto.git"
+    "url": "git+https://github.com/dev0x451/mesto.git"
   },
   "author": "Arkady Schapov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sigma696/mesto/issues"
+    "url": "https://github.com/dev0x451/mesto/issues"
   },
-  "homepage": "https://github.com/sigma696/mesto#readme",
+  "homepage": "https://github.com/dev0x451/mesto#readme",
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
