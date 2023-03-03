@@ -30,10 +30,9 @@ npm run dev
 * Для сборки:
 ```shell
 npm run build
-
+```
 ## Live Demo
-
 С live-демо проекта можно ознакомиться [здесь](https://mesto.schapov.dev/mestonoauth/)
 
-```
+
 Спасибо за внимание!
